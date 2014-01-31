@@ -6,11 +6,10 @@ import java.util.List;
 import ca.ubc.cpsc310.gitlab.client.products.ProductItem;
 import ca.ubc.cpsc310.gitlab.client.user.IUser;
 import ca.ubc.cpsc310.gitlab.client.user.User;
-
 import ca.ubc.cpsc310.gitlab.client.service.LoadUsersService;
 import ca.ubc.cpsc310.gitlab.client.service.LoadUsersServiceAsync;
-
 import ca.ubc.cpsc310.gitlab.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,6 +17,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -44,6 +44,10 @@ public class GitLab implements EntryPoint {
 
 
 	private final FlexTable flexTable = new FlexTable();
+	
+	Random r;									 
+	private final int rint = r.nextInt(10)+1; //this is obviously wrong
+	
 
 	final LoadUsersServiceAsync service = GWT.create(LoadUsersService.class);
 
@@ -53,20 +57,28 @@ public class GitLab implements EntryPoint {
 
 	public void onModuleLoad() 
 	{
-		
-		service.getUsers(new AsyncCallback<List<IUser>>(){
+		Window.alert("Loading Module ");
+		if (rint > 1) //if random int is 1 (not 0), load the module
+		{
+			
+			service.getUsers(new AsyncCallback<List<IUser>>(){
 
-			@Override
-			public void onFailure(Throwable caught) {
+				@Override
+				public void onFailure(Throwable caught) {
 					Window.alert("Error occured " + caught.getClass() + " : " + caught.getMessage());
-				
-			}
+					
+				}
 
-			@Override
-			public void onSuccess(List<IUser> result) {
-				Window.alert("Got list back with " +  result.size() + " entries");
-				
-			}});
+				@Override
+				public void onSuccess(List<IUser> result) {
+					Window.alert("Got list back with " +  result.size() + " entries");
+					
+				}});
+		}
+		else
+		{
+			Window.alert("Access Denied");
+		}
 	
 	}
 	
