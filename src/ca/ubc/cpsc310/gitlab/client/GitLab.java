@@ -58,8 +58,8 @@ public class GitLab implements EntryPoint {
 	public void onModuleLoad() 
 	{
 		Window.alert("Loading Module ");
-		if (rint > 1) //if random int is 1 (not 0), load the module
-		{
+//		if (rint > 1) //if random int is 1 (not 0), load the module
+//		{
 			
 			service.getUsers(new AsyncCallback<List<IUser>>(){
 
@@ -74,11 +74,11 @@ public class GitLab implements EntryPoint {
 					Window.alert("Got list back with " +  result.size() + " entries");
 					
 				}});
-		}
-		else
-		{
-			Window.alert("Access Denied");
-		}
+//		}
+//		else
+//		{
+//			Window.alert("Access Denied");
+//		}
 	
 	}
 	
