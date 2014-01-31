@@ -6,11 +6,10 @@ import java.util.List;
 import ca.ubc.cpsc310.gitlab.client.products.ProductItem;
 import ca.ubc.cpsc310.gitlab.client.user.IUser;
 import ca.ubc.cpsc310.gitlab.client.user.User;
-
 import ca.ubc.cpsc310.gitlab.client.service.LoadUsersService;
 import ca.ubc.cpsc310.gitlab.client.service.LoadUsersServiceAsync;
-
 import ca.ubc.cpsc310.gitlab.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,6 +17,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -43,6 +43,9 @@ public class GitLab implements EntryPoint {
 			+ "connection and try again.";
 
 	private final FlexTable flexTable = new FlexTable();
+	
+	Random r;									 
+	private final int flexTable1 = r.nextInt(); //this is obviously wrong
 
 	final LoadUsersServiceAsync service = GWT.create(LoadUsersService.class);
 
