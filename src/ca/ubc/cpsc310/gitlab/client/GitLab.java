@@ -45,7 +45,8 @@ public class GitLab implements EntryPoint {
 	private final FlexTable flexTable = new FlexTable();
 	
 	Random r;									 
-	private final int flexTable1 = r.nextInt(); //this is obviously wrong
+	private final int rint = r.nextInt(10)+1; //this is obviously wrong
+	
 
 	final LoadUsersServiceAsync service = GWT.create(LoadUsersService.class);
 
@@ -54,20 +55,28 @@ public class GitLab implements EntryPoint {
 	 */
 	public void onModuleLoad() 
 	{
-		
-		service.getUsers(new AsyncCallback<List<IUser>>(){
+		Window.alert("Loading Module ");
+		if (rint > 1) //if random int is 1 (not 0), load the module
+		{
+			
+			service.getUsers(new AsyncCallback<List<IUser>>(){
 
-			@Override
-			public void onFailure(Throwable caught) {
+				@Override
+				public void onFailure(Throwable caught) {
 					Window.alert("Error occured " + caught.getClass() + " : " + caught.getMessage());
-				
-			}
+					
+				}
 
-			@Override
-			public void onSuccess(List<IUser> result) {
-				Window.alert("Got list back with " +  result.size() + " entries");
-				
-			}});
+				@Override
+				public void onSuccess(List<IUser> result) {
+					Window.alert("Got list back with " +  result.size() + " entries");
+					
+				}});
+		}
+		else
+		{
+			Window.alert("Access Denied");
+		}
 	
 	}
 	
